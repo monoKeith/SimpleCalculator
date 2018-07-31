@@ -28,6 +28,7 @@ class ViewController: NSViewController {
         if !floatstate {
             floatstate = true
             inputtmp += "."
+            UpdateDisplay()
         }
     }
     
@@ -129,10 +130,14 @@ class ViewController: NSViewController {
     
     func UpdateDisplay(){
         //Detect if the content is float and adjust display style
-        if (displaying.truncatingRemainder(dividingBy: 1.0) != 0) || floatstate{
-            Monitor.stringValue = String(displaying)
+        if Double(inputtmp) != displaying{
+            if floatstate{
+                Monitor.stringValue = String(displaying)
+            }else{
+                Monitor.stringValue = String(Int(displaying))
+            }
         }else{
-            Monitor.stringValue = String(Int(displaying))
+            Monitor.stringValue = inputtmp
         }
     }
     
